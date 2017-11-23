@@ -7,7 +7,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
-add_executable(QQDemo ${SRC} QQDemo.rc)
+
+file(GLOB_RECURSE  ALL_H_FILE *.h )
+add_executable(QQDemo ${SRC} QQDemo.rc ${ALL_H_FILE})
+
 set_target_properties(QQDemo PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
 target_link_libraries(QQDemo duilib)
 

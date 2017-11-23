@@ -8,7 +8,9 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
-add_executable(RichListDemo ${SRC_LIST} RichListDemo.rc)
+file(GLOB_RECURSE  ALL_H_FILE *.h )
+add_executable(RichListDemo ${SRC_LIST} RichListDemo.rc ${ALL_H_FILE})
+
 set_target_properties(RichListDemo PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
 target_link_libraries(RichListDemo duilib)
 

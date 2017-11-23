@@ -6,7 +6,10 @@ set(source_files Main.cpp)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
-add_executable(ListDemo ${source_files})
+
+file(GLOB_RECURSE  ALL_H_FILE *.h )
+add_executable(ListDemo ${source_files} ${ALL_H_FILE})
+
 add_dependencies(ListDemo duilib)
 target_link_libraries(ListDemo duilib)
 set_target_properties(ListDemo PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")

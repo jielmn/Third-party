@@ -6,7 +6,10 @@ set(source_files 360safe.cpp stdafx.cpp)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
-add_executable(360safedemo ${source_files})
+
+file(GLOB_RECURSE  ALL_H_FILE *.h )
+add_executable(360safedemo ${source_files} ${ALL_H_FILE})
+
 set_target_properties(360safedemo PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
 add_dependencies(360safedemo duilib)
 
