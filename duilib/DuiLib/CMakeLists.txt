@@ -15,11 +15,12 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Layout)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Utils)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
-add_library(duilib SHARED ${Control_src} ${Core_src} ${Layout_src} ${Utils_src} ${Root_src})
+add_library(duilib  SHARED ${Control_src} ${Core_src} ${Layout_src} ${Utils_src} ${Root_src})
 
 add_definitions(-DUILIB_EXPORTS)
 target_link_libraries(duilib comctl32)
 set_target_properties(duilib PROPERTIES OUTPUT_NAME "duilib")
+set_target_properties(duilib PROPERTIES DEBUG_OUTPUT_NAME "duilibd" ) 
 #add_custom_command(TARGET duilib POST_BUILD
 #  COMMAND ${CMAKE_COMMAND} -E copy_if_different
 #  ${PROJECT_BINARY_DIR}/lib/\$\(TargetName\)/duilib.dll ${PROJECT_SOURCE_DIR}/bin/duilib.dll)

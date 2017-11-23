@@ -17,7 +17,7 @@ message(STATUS," CMake project files for duilib")
 
 # add each CMake file
 add_subdirectory(duilib)
-#add_subdirectory(360SafeDemo)
+add_subdirectory(360SafeDemo)
 #add_subdirectory(FlashDemo)
 #add_subdirectory(GameDemo)
 #add_subdirectory(ListDemo)
