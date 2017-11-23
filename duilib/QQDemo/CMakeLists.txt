@@ -11,7 +11,8 @@ add_executable(QQDemo ${SRC} QQDemo.rc)
 set_target_properties(QQDemo PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
 target_link_libraries(QQDemo duilib)
 
+add_custom_command(TARGET QQDemo POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${PROJECT_SOURCE_DIR}/bin/skin/360SafeRes.zip ${PROJECT_BINARY_DIR}/bin/Debug/skin/360SafeRes.zip COMMAND ${CMAKE_COMMAND} -E copy_if_different ${PROJECT_SOURCE_DIR}/bin/skin/360SafeRes.zip ${PROJECT_BINARY_DIR}/bin/Release/skin/360SafeRes.zip )
 
-add_custom_command(TARGET QQDemo POST_BUILD
+#add_custom_command(TARGET QQDemo POST_BUILD
 #  COMMAND ${CMAKE_COMMAND} -E copy_if_different
 #  ${PROJECT_BINARY_DIR}/bin/QQDemo.exe ${PROJECT_SOURCE_DIR}/bin/QQDemo.exe)

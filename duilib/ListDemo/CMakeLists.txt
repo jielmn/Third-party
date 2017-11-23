@@ -11,6 +11,8 @@ add_dependencies(ListDemo duilib)
 target_link_libraries(ListDemo duilib)
 set_target_properties(ListDemo PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
 
-add_custom_command(TARGET ListDemo POST_BUILD
+add_custom_command(TARGET ListDemo POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${PROJECT_SOURCE_DIR}/bin/skin/ListRes.zip ${PROJECT_BINARY_DIR}/bin/Debug/skin/ListRes.zip COMMAND ${CMAKE_COMMAND} -E copy_if_different ${PROJECT_SOURCE_DIR}/bin/skin/ListRes.zip ${PROJECT_BINARY_DIR}/bin/Release/skin/ListRes.zip )
+
+#add_custom_command(TARGET ListDemo POST_BUILD
 #  COMMAND ${CMAKE_COMMAND} -E copy_if_different
 #  ${PROJECT_BINARY_DIR}/bin/ListDemo.exe ${PROJECT_SOURCE_DIR}/bin/ListDemo.exe)
