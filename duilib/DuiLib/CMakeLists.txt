@@ -21,6 +21,13 @@ add_definitions(-DUILIB_EXPORTS)
 target_link_libraries(duilib comctl32)
 set_target_properties(duilib PROPERTIES OUTPUT_NAME "duilib")
 set_target_properties(duilib PROPERTIES DEBUG_OUTPUT_NAME "duilibd" ) 
+
+set(DEBUG_LIBRARY   ${PROJECT_BINARY_DIR}/lib/Debug/duilibd.dll)
+set(RELEASE_LIBRARY ${PROJECT_BINARY_DIR}/lib/Release/duilib.dll)
+
+add_custom_command(TARGET duilib POST_BUILD COMMAND if exist ${DEBUG_LIBRARY} ${CMAKE_COMMAND} -E copy_if_different ${DEBUG_LIBRARY} ${PROJECT_BINARY_DIR}/bin/Debug/duilibd.dll COMMAND if exist ${RELEASE_LIBRARY} ${CMAKE_COMMAND} -E copy_if_different ${RELEASE_LIBRARY} ${PROJECT_BINARY_DIR}/bin/Release/duilib.dll )
+
+
 #add_custom_command(TARGET duilib POST_BUILD
 #  COMMAND ${CMAKE_COMMAND} -E copy_if_different
 #  ${PROJECT_BINARY_DIR}/lib/\$\(TargetName\)/duilib.dll ${PROJECT_SOURCE_DIR}/bin/duilib.dll)

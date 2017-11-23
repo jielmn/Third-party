@@ -12,6 +12,9 @@ add_dependencies(360safedemo duilib)
 
 target_link_libraries( 360safedemo debug ${PROJECT_BINARY_DIR}/lib/debug/duilibd.lib)
 target_link_libraries( 360safedemo optimized duilib)
+
+add_custom_command(TARGET 360safedemo POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${PROJECT_SOURCE_DIR}/bin/skin/360SafeRes.zip ${PROJECT_BINARY_DIR}/bin/Debug/skin/360SafeRes.zip COMMAND ${CMAKE_COMMAND} -E copy_if_different ${PROJECT_SOURCE_DIR}/bin/skin/360SafeRes.zip ${PROJECT_BINARY_DIR}/bin/Release/skin/360SafeRes.zip )
+
 #add_custom_command(TARGET 360safedemo POST_BUILD
 #  COMMAND ${CMAKE_COMMAND} -E copy_if_different
 #  ${PROJECT_BINARY_DIR}/bin/360safedemo.exe ${PROJECT_SOURCE_DIR}/bin/360safedemo.exe)
