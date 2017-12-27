@@ -215,6 +215,16 @@ LRESULT CComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
         // the items back to the righfull owner/manager when the window closes.
         m_pLayout = new CComboBodyUI(m_pOwner);
         m_pLayout->SetManager(&m_pm, NULL, true);
+
+		LPCTSTR scroll_bar_value = m_pOwner->GetManager()->GetDefaultAttributeList(_T("HScrollBar"));
+		if (scroll_bar_value) {
+			m_pm.AddDefaultAttributeList(_T("HScrollBar"), scroll_bar_value);
+		}
+		scroll_bar_value = m_pOwner->GetManager()->GetDefaultAttributeList(_T("VScrollBar"));
+		if (scroll_bar_value) {
+			m_pm.AddDefaultAttributeList(_T("VScrollBar"), scroll_bar_value);
+		}
+
         LPCTSTR pDefaultAttributes = m_pOwner->GetManager()->GetDefaultAttributeList(_T("VerticalLayout"));
         if( pDefaultAttributes ) {
             m_pLayout->SetAttributeList(pDefaultAttributes);
@@ -228,7 +238,7 @@ LRESULT CComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
         m_pLayout->SetAttributeList(m_pOwner->GetDropBoxAttributeList());
         for( int i = 0; i < m_pOwner->GetCount(); i++ ) {
             m_pLayout->Add(static_cast<CControlUI*>(m_pOwner->GetItemAt(i)));
-        }
+        }		
         m_pm.AttachDialog(m_pLayout);
         
         return 0;
@@ -653,10 +663,10 @@ void CComboUI::DoEvent(TEventUI& event)
     if( event.Type == UIEVENT_SCROLLWHEEL )
     {
         if (IsEnabled()) {
-            bool bDownward = LOWORD(event.wParam) == SB_LINEDOWN;
-            SetSelectCloseFlag(false);
-            SelectItem(FindSelectable(m_iCurSel + (bDownward ? 1 : -1), bDownward));
-            SetSelectCloseFlag(true);
+            //bool bDownward = LOWORD(event.wParam) == SB_LINEDOWN;
+            //SetSelectCloseFlag(false);
+            //SelectItem(FindSelectable(m_iCurSel + (bDownward ? 1 : -1), bDownward));
+            //SetSelectCloseFlag(true);
             return;
         }
     }
