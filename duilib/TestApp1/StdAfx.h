@@ -14,6 +14,7 @@
 
 using namespace DuiLib;
 
+/*
 #ifdef _DEBUG
 #   ifdef _UNICODE
 #       pragma comment(lib, "..\\Lib\\DuiLib_ud.lib")
@@ -27,7 +28,7 @@ using namespace DuiLib;
 #       pragma comment(lib, "..\\Lib\\DuiLib.lib")
 #   endif
 #endif
-
+*/
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

@@ -40,3 +40,4 @@ add_subdirectory(ListDemo)
 # add_subdirectory(MenuDemo) the sources in this project has error
 add_subdirectory(QQDemo)
 add_subdirectory(RichListDemo)
+add_subdirectory(MenuDemo)
