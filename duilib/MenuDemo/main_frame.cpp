@@ -181,7 +181,7 @@ void MainFrame::Notify(TNotifyUI& msg)
 		}
 		else if (_tcsicmp(msg.pSender->GetName(), _T("btn_menu")) == 0)	
 		{
-			CMenuWnd* pMenu = new CMenuWnd(m_hWnd);
+			CMenuWnd* pMenu = new CMenuWnd(m_hWnd, msg.pSender);
 			CDuiPoint point = msg.ptMouse;
 			ClientToScreen(m_hWnd, &point);
 			STRINGorID xml(IDR_XML_MENU);
@@ -191,6 +191,15 @@ void MainFrame::Notify(TNotifyUI& msg)
 	else if (_tcsicmp(msg.sType, kTimer) == 0)
 	{
 		return OnTimer(msg);
+	}
+	else if (_tcsicmp(msg.sType, "munu_test_0_1") == 0) {
+		int a = 100;
+	}
+	else if ( _tcsicmp(msg.sType, "munu_test_0_2") == 0 ) {
+		int a = 100;
+	}
+	else if (_tcsicmp(msg.sType, "munu_test_1") == 0) {
+		int a = 100;
 	}
 }
 

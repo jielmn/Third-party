@@ -71,7 +71,7 @@ class CMenuElementUI;
 class CMenuWnd : public CWindowWnd, public ContextMenuReceiver
 {
 public:
-	CMenuWnd(HWND hParent = NULL);
+	CMenuWnd(HWND hParent = NULL, CControlUI * pNotifyTarget = 0);
     void Init(CMenuElementUI* pOwner, STRINGorID xml, LPCTSTR pSkinType, POINT point);
     LPCTSTR GetWindowClassName() const;
     void OnFinalMessage(HWND hWnd);
@@ -88,6 +88,8 @@ public:
     CPaintManagerUI m_pm;
     CMenuElementUI* m_pOwner;
     CMenuUI* m_pLayout;
+
+	CControlUI * m_pNotifyTarget;
 };
 
 class CListContainerElementUI;
@@ -95,7 +97,7 @@ class CMenuElementUI : public CListContainerElementUI
 {
 	friend CMenuWnd;
 public:
-    CMenuElementUI();
+    CMenuElementUI(CControlUI * pNotifyTarget = 0);
 	~CMenuElementUI();
 
     LPCTSTR GetClass() const;
@@ -118,6 +120,7 @@ public:
 
 protected:
 	CMenuWnd* m_pWindow;
+	CControlUI * m_pNotifyTarget;
 };
 
 } // namespace DuiLib

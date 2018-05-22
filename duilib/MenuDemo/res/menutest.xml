@@ -20,27 +20,27 @@
           <Label />
         </VerticalLayout>
       </HorizontalLayout>
-      <MenuElement text="     菜单测试0        ">
+      <MenuElement text="菜单测试0" >
         <HorizontalLayout>
           <Label />
           <Label width="20"  bkimage="res='122' restype='png' source='0,0,16,16' dest='0,5,15,20'"/>
         </HorizontalLayout>
-        <MenuElement text="     菜单测ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd试1        " />
-        <MenuElement text="     菜单测试2        " />
+        <MenuElement text="菜单测试0_1" name="munu_test_0_1" />
+        <MenuElement text="菜单测试0_2" name="munu_test_0_2" />
       </MenuElement>
-      <MenuElement text="     菜单测试3        " />
-      <MenuElement text="     菜单测试4        ">
+      <MenuElement text="菜单测试1" name="munu_test_1" />
+      <MenuElement text="菜单测试2">
         <HorizontalLayout>
           <Label />
           <Label width="20"  bkimage="res='122' restype='png' source='0,0,16,16' dest='0,5,15,20'"/>
         </HorizontalLayout>
-        <MenuElement text="     菜单测试5        ">
+        <MenuElement text="菜单测试2_1" >
           <HorizontalLayout>
             <Label />
             <Label width="20"  bkimage="res='122' restype='png' source='0,0,16,16' dest='0,5,15,20'"/>
           </HorizontalLayout>
-          <MenuElement text="     菜单测试6        " />
-          <MenuElement text="     菜单测试7        " />
+          <MenuElement text="菜单测试2_1_1" name="munu_test_2_1_1"  />
+          <MenuElement text="菜单测试2_1_2" name="munu_test_2_1_2"  />
         </MenuElement>
         <MenuElement text="     菜单测试8        " >
           <HorizontalLayout>
@@ -60,8 +60,8 @@
       <MenuElement text="     菜单测ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd试1        " />
       <MenuElement text="     菜单测试2        " />
     </MenuElement>
-    <MenuElement text="     菜单测试3        " />
-    <MenuElement text="     菜单测试4        ">
+    <MenuElement text="菜单测试3b" name="munu_test_3b" />
+    <MenuElement text="菜单测试4b" name="munu_test_4b">
       <HorizontalLayout>
         <Label />
         <Label width="20"  bkimage="res='122' restype='png' source='0,0,16,16' dest='0,5,15,20'"/>
@@ -71,7 +71,7 @@
           <Label />
           <Label width="20"  bkimage="res='122' restype='png' source='0,0,16,16' dest='0,5,15,20'"/>
         </HorizontalLayout>
-        <MenuElement text="     菜单测试6        " />
+        <MenuElement text="     菜单测试6        "  name="munu_test_6b" />
         <MenuElement text="     菜单测试7        " />
       </MenuElement>
       <MenuElement text="     菜单测试8        " >

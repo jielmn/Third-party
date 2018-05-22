@@ -120,6 +120,11 @@ void CMenuUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 //
 class CMenuBuilderCallback: public IDialogBuilderCallback
 {
+public:
+	CMenuBuilderCallback( CControlUI * pNotifyTarget = 0 ) : m_pNotifyTarget(pNotifyTarget) {
+
+	}
+
 	CControlUI* CreateControl(LPCTSTR pstrClass)
 	{
 		if (_tcsicmp(pstrClass, kMenuUIInterfaceName) == 0)
@@ -128,17 +133,21 @@ class CMenuBuilderCallback: public IDialogBuilderCallback
 		}
 		else if (_tcsicmp(pstrClass, kMenuElementUIInterfaceName) == 0)
 		{
-			return new CMenuElementUI();
+			return new CMenuElementUI(m_pNotifyTarget);
 		}
 		return NULL;
 	}
+
+private:
+	CControlUI *       m_pNotifyTarget;
 };
 
-CMenuWnd::CMenuWnd(HWND hParent):
+CMenuWnd::CMenuWnd(HWND hParent, CControlUI * pNotifyTarget /*= 0*/):
 m_hParent(hParent),
 m_pOwner(NULL),
 m_pLayout(),
-m_xml(_T(""))
+m_xml(_T("")),
+m_pNotifyTarget(pNotifyTarget)
 {}
 
 BOOL CMenuWnd::Receive(ContextMenuParam param)
@@ -358,7 +367,7 @@ LRESULT CMenuWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			m_pm.Init(m_hWnd);
 
 			CDialogBuilder builder;
-			CMenuBuilderCallback menuCallback;
+			CMenuBuilderCallback menuCallback(m_pNotifyTarget);
 
 			CControlUI* pRoot = builder.Create(m_xml, m_sType.GetData(), &menuCallback, &m_pm);
 			m_pm.AttachDialog(pRoot);
@@ -453,6 +462,15 @@ LRESULT CMenuWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			Close();
 		}
 	}
+	else if (uMsg == WM_LBUTTONDOWN) {
+		if (m_pNotifyTarget) {
+			POINT pt = { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
+			CControlUI* pControl = m_pm.FindControl(pt);
+			if (pControl) {
+				m_pNotifyTarget->GetManager()->SendNotify(m_pNotifyTarget, pControl->GetName(), 0, 0, true);
+			}			
+		}
+	}
 
     LRESULT lRes = 0;
     if( m_pm.MessageHandler(uMsg, wParam, lParam, lRes) ) return lRes;
@@ -466,8 +484,8 @@ LRESULT CMenuWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 const TCHAR* const kMenuElementUIClassName = _T("MenuElement");
 const TCHAR* const kMenuElementUIInterfaceName = _T("MenuElement");
 
-CMenuElementUI::CMenuElementUI():
-m_pWindow(NULL)
+CMenuElementUI::CMenuElementUI(CControlUI * pNotifyTarget /*= 0*/):
+m_pWindow(NULL), m_pNotifyTarget(pNotifyTarget)
 {
 	m_cxyFixed.cy = 25;
 	m_bMouseChildEnabled = true;
@@ -747,7 +765,7 @@ void CMenuElementUI::CreateMenuWnd()
 {
 	if( m_pWindow ) return;
 
-	m_pWindow = new CMenuWnd(m_pManager->GetPaintWindow());
+	m_pWindow = new CMenuWnd(m_pManager->GetPaintWindow(), m_pNotifyTarget);
 	ASSERT(m_pWindow);
 
 	ContextMenuParam param;
