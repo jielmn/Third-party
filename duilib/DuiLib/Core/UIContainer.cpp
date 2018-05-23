@@ -729,6 +729,11 @@ namespace DuiLib
 		if( (uFlags & UIFIND_VISIBLE) != 0 && !IsVisible() ) return NULL;
 		if( (uFlags & UIFIND_ENABLED) != 0 && !IsEnabled() ) return NULL;
 		if( (uFlags & UIFIND_HITTEST) != 0 && !::PtInRect(&m_rcItem, *(static_cast<LPPOINT>(pData))) ) return NULL;
+
+		if ( _tcsicmp( GetClass(), _T("MenuElement") ) == 0) {
+			return this;
+		}
+
 		if( (uFlags & UIFIND_UPDATETEST) != 0 && Proc(this, pData) != NULL ) return NULL;
 
 		CControlUI* pResult = NULL;

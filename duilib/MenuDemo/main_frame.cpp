@@ -193,13 +193,13 @@ void MainFrame::Notify(TNotifyUI& msg)
 		return OnTimer(msg);
 	}
 	else if (_tcsicmp(msg.sType, "munu_test_0_1") == 0) {
-		int a = 100;
+		::MessageBox(0, "test_0_1 click", "menu", 0);
 	}
 	else if ( _tcsicmp(msg.sType, "munu_test_0_2") == 0 ) {
-		int a = 100;
+		::MessageBox(0, "test_0_2 click", "menu", 0);
 	}
 	else if (_tcsicmp(msg.sType, "munu_test_1") == 0) {
-		int a = 100;
+		::MessageBox(0, "test_1 click", "menu", 0);
 	}
 }
 
