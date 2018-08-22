@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "UIEdit.h"
 
+#define  MY_EDIT_SET_SEL_TIMER     1
+
 namespace DuiLib
 {
 	class CEditWnd : public CWindowWnd
@@ -73,7 +75,13 @@ namespace DuiLib
 		}
 		else {
 			int nSize = GetWindowTextLength(m_hWnd);
-			Edit_SetSel(m_hWnd, nSize, nSize);
+			// 防止在空间足够，不需要滑动的情况下，向左滑动字符串
+			if ( !::IsRectEmpty(&rcPos) ) {
+				Edit_SetSel(m_hWnd, nSize, nSize);
+			}
+			else {
+				SetTimer(m_hWnd, MY_EDIT_SET_SEL_TIMER, 100, 0);
+			}
 		}
 
 		m_bInit = true;    
@@ -204,6 +212,11 @@ namespace DuiLib
 				::GetClientRect(m_hWnd, &rcClient);
 				::InvalidateRect(m_hWnd, &rcClient, FALSE);
 				return 0;
+			}
+			else if (wParam == MY_EDIT_SET_SEL_TIMER) {
+				int nSize = GetWindowTextLength(m_hWnd);
+				Edit_SetSel(m_hWnd, nSize, nSize);
+				KillTimer( m_hWnd, wParam);
 			}
 			bHandled = FALSE;
 		}
