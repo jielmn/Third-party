@@ -278,6 +278,8 @@ protected:                                                                \
 
 #define  DUI_CTR_LISTCONTAINERELEMENT            (_T("ListContainerElement"))
 
+#define  DUI_CTR_ANIMATION_TAB_LAYOUT             (_T("AnimationTabLayout"))
+
 
 ///
 //////////////END控件名称宏定义//////////////////////////////////////////////////

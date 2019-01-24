@@ -286,7 +286,7 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
 		}
         else {
 #ifdef _DEBUG
-			DUITRACE(_T("Create Control: %s"), pstrClass);
+			// DUITRACE(_T("Create Control: %s"), pstrClass);
 #endif
             SIZE_T cchLen = _tcslen(pstrClass);
             switch( cchLen ) {
@@ -347,6 +347,9 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
                 if( _tcsicmp(pstrClass, DUI_CTR_HORIZONTALLAYOUT) == 0 )      pControl = new CHorizontalLayoutUI;
                 else if( _tcsicmp(pstrClass, DUI_CTR_LISTLABELELEMENT) == 0 ) pControl = new CListLabelElementUI;
                 break;
+			case 18:
+				if (_tcsicmp(pstrClass, DUI_CTR_ANIMATION_TAB_LAYOUT) == 0)      pControl = new CAnimationTabLayoutUI;
+				break;
             case 20:
                 if( _tcsicmp(pstrClass, DUI_CTR_LISTCONTAINERELEMENT) == 0 )  pControl = new CListContainerElementUI;
                 break;
