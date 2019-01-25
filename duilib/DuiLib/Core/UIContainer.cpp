@@ -193,7 +193,7 @@ namespace DuiLib
 	void CContainerUI::SetChildPadding(int iPadding)
 	{
 		m_iChildPadding = iPadding;
-		if (m_iChildPadding < 0) m_iChildPadding = 0;
+		// if (m_iChildPadding < 0) m_iChildPadding = 0;
 		NeedUpdate();
 	}
 
