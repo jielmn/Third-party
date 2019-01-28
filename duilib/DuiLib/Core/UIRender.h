@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <GdiPlus.h>
+
 namespace DuiLib {
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -52,6 +54,9 @@ public:
 	static HBITMAP GenerateBitmap(CPaintManagerUI* pManager, RECT rc, CControlUI* pStopControl = NULL, DWORD dwFilterColor = 0);
     static HBITMAP GenerateBitmap(CPaintManagerUI* pManager, CControlUI* pControl, RECT rc, DWORD dwFilterColor = 0);
 	static SIZE GetTextSize(HDC hDC, CPaintManagerUI* pManager , LPCTSTR pstrText, int iFont, UINT uStyle);
+
+	static Gdiplus::Image*	GdiplusLoadImage(LPCTSTR pstrPath);
+	static Gdiplus::Image* GdiplusLoadImage(LPVOID pBuf, size_t dwSize);
 };
 
 } // namespace DuiLib
