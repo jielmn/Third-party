@@ -1268,7 +1268,7 @@ void CRenderEngine::DrawRoundRect(HDC hDC, const RECT& rc, int nSize, int width,
     ::DeleteObject(hPen);
 }
 
-void CRenderEngine::DrawText(HDC hDC, CPaintManagerUI* pManager, RECT& rc, LPCTSTR pstrText, DWORD dwTextColor, int iFont, UINT uStyle)
+void CRenderEngine::DrawText(HDC hDC, CPaintManagerUI* pManager, RECT& rc, LPCTSTR pstrText, DWORD dwTextColor, int iFont, UINT uStyle, BOOL bNoPrefix /*= TRUE*/)
 {
     ASSERT(::GetObjectType(hDC)==OBJ_DC || ::GetObjectType(hDC)==OBJ_MEMDC);
     if( pstrText == NULL || pManager == NULL ) return;
@@ -1280,7 +1280,10 @@ void CRenderEngine::DrawText(HDC hDC, CPaintManagerUI* pManager, RECT& rc, LPCTS
     ::SetBkMode(hDC, TRANSPARENT);
     ::SetTextColor(hDC, RGB(GetBValue(dwTextColor), GetGValue(dwTextColor), GetRValue(dwTextColor)));
     HFONT hOldFont = (HFONT)::SelectObject(hDC, pManager->GetFont(iFont));
-    ::DrawText(hDC, pstrText, -1, &rc, uStyle | DT_NOPREFIX);
+	if (bNoPrefix)
+		::DrawText(hDC, pstrText, -1, &rc, uStyle | DT_NOPREFIX);
+	else
+		::DrawText(hDC, pstrText, -1, &rc, uStyle );
     ::SelectObject(hDC, hOldFont);
 }
 
