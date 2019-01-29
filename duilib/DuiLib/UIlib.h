@@ -117,3 +117,4 @@
 #include "Control/UIHotKey.h"
 #include "Control/UIIPAddressEx.h"
 #include "Control/UIRing.h"
+#include "Control/UIFileBrowse.h"

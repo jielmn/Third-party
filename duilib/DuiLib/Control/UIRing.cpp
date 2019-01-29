@@ -23,7 +23,7 @@ namespace DuiLib
 
 	LPVOID CRingUI::GetInterface(LPCTSTR pstrName)
 	{
-		if (_tcscmp(pstrName, _T("Ring")) == 0) return static_cast<CRingUI*>(this);
+		if (_tcscmp(pstrName, DUI_CTR_RING) == 0) return static_cast<CRingUI*>(this);
 		return CLabelUI::GetInterface(pstrName);
 	}
 

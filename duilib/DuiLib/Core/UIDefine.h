@@ -283,6 +283,7 @@ protected:                                                                \
 #define  DUI_CTR_HOTKEY                           (_T("HotKey"))
 #define  DUI_CTR_IPADDRESS                        (_T("IPAddressEx"))
 #define  DUI_CTR_RING                             (_T("Ring"))
+#define  DUI_CTR_FILEBROWSE                       (_T("FileBrowse"))
 
 
 ///

@@ -252,7 +252,7 @@ namespace DuiLib
 
 	LPVOID CHotKeyUI::GetInterface(LPCTSTR pstrName)
 	{
-		if (_tcscmp(pstrName, _T("HotKey")) == 0) return static_cast<CHotKeyUI *>(this);
+		if (_tcscmp(pstrName, DUI_CTR_HOTKEY) == 0) return static_cast<CHotKeyUI *>(this);
 		return CLabelUI::GetInterface(pstrName);
 	}
 
