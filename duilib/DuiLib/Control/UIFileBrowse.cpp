@@ -82,7 +82,7 @@ namespace DuiLib
 
 	void CFileBrowseUI::Notify(TNotifyUI& msg) {
 		if (msg.sType == "click") {
-			if (msg.pSender->GetName() == "btnBrowse") {
+			if (msg.pSender == m_btnBrowse) {
 				OnBrowse();
 			}
 		}
