@@ -39,8 +39,6 @@ namespace DuiLib
 		CDuiString m_strNum;
 	};
 
-#endif // __UIIPADDRESSEX_H__
-
-
-
 }
+
+#endif // __UIIPADDRESSEX_H__
