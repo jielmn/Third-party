@@ -15,11 +15,11 @@ namespace DuiLib
 		LPVOID GetInterface(LPCTSTR pstrName);
 		CDuiString GetFileName() const;
 		void SetFileName(LPCTSTR pstrFileName);
+		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
 
 	private:
 		void DoInit();
-		void Notify(TNotifyUI& msg);
-		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
+		void Notify(TNotifyUI& msg);		
 		void OnBrowse();
 
 	private:
