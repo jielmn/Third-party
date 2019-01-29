@@ -18,7 +18,7 @@ namespace DuiLib
 
 	LPCTSTR CRingUI::GetClass() const
 	{
-		return _T("RingUI");
+		return DUI_CTR_RING;
 	}
 
 	LPVOID CRingUI::GetInterface(LPCTSTR pstrName)

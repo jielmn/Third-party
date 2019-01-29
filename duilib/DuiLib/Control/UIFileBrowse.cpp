@@ -39,7 +39,7 @@ namespace DuiLib
 	}
 
 	LPCTSTR CFileBrowseUI::GetClass() const {
-		return _T("FileBrowseUI");
+		return DUI_CTR_FILEBROWSE;
 	}
 
 	LPVOID CFileBrowseUI::GetInterface(LPCTSTR pstrName) {

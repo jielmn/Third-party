@@ -247,7 +247,7 @@ namespace DuiLib
 
 	LPCTSTR CHotKeyUI::GetClass() const
 	{
-		return _T("HotKeyUI");
+		return DUI_CTR_HOTKEY;
 	}
 
 	LPVOID CHotKeyUI::GetInterface(LPCTSTR pstrName)
