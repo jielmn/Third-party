@@ -4,6 +4,15 @@
 #define SNPRINTF(s,n, f,...)      _snprintf(s, n, f, __VA_ARGS__)
 #define STRNCPY(d, s, n)          DO_ONCE( strncpy( d, s, (n)-1 ); d[(n)-1] = '\0'; )
 
+#define  BROWSE_XML              \
+"<?xml version=\"1.0\" encoding=\"utf-8\"?>" \
+"<Window>"  \
+"<HorizontalLayout>"  \
+"<Edit name=\"edFileName\" readonly=\"true\" bkcolor=\"0xFFCCCCCC\" nativebkcolor=\"0xFFCCCCCC\" />"  \
+"<Button name=\"btnBrowse\" padding=\"1,0,0,0\" />"  \
+"</HorizontalLayout>"  \
+"</Window>"
+
 namespace DuiLib
 {
 
@@ -44,7 +53,7 @@ namespace DuiLib
 		CDialogBuilder builder;
 		CContainerUI* pChildWindow =
 			static_cast<CHorizontalLayoutUI*>(
-				builder.Create(_T("FileBrowse.xml"), (UINT)0, NULL, m_pManager));
+				builder.Create(_T(BROWSE_XML), (UINT)0, NULL, m_pManager));
 		if (pChildWindow) {
 			this->Add(pChildWindow);
 			m_pManager->AddNotifier(this);
