@@ -280,6 +280,10 @@ protected:                                                                \
 
 #define  DUI_CTR_ANIMATION_TAB_LAYOUT             (_T("AnimationTabLayout"))
 
+#define  DUI_CTR_HOTKEY                           (_T("HotKey"))
+#define  DUI_CTR_IPADDRESS                        (_T("IPAddressEx"))
+#define  DUI_CTR_RING                             (_T("Ring"))
+
 
 ///
 //////////////END控件名称宏定义//////////////////////////////////////////////////

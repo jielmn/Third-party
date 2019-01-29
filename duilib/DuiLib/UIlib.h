@@ -113,3 +113,7 @@
 
 #include "Control/UIAnimation.h"
 #include "Layout/UIAnimationTabLayout.h"
+
+#include "Control/UIHotKey.h"
+#include "Control/UIIPAddressEx.h"
+#include "Control/UIRing.h"
