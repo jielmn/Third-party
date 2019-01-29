@@ -13,7 +13,8 @@ namespace DuiLib
 		~CFileBrowseUI();
 		LPCTSTR GetClass() const;
 		LPVOID GetInterface(LPCTSTR pstrName);
-		CDuiString GetFileName();
+		CDuiString GetFileName() const;
+		void SetFileName(LPCTSTR pstrFileName);
 
 	private:
 		void DoInit();

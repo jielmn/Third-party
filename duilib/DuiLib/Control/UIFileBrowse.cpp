@@ -159,12 +159,18 @@ namespace DuiLib
 		}
 	}
 
-	CDuiString CFileBrowseUI::GetFileName() {
+	CDuiString CFileBrowseUI::GetFileName() const {
 		if (m_edFileName) {
 			return m_edFileName->GetText();
 		}
 		else {
 			return "";
+		}
+	}
+
+	void CFileBrowseUI::SetFileName(LPCTSTR pstrFileName) {
+		if ( m_edFileName ) {
+			m_edFileName->SetText(pstrFileName);
 		}
 	}
 
