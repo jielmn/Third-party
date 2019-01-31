@@ -96,8 +96,8 @@ int RunMain(HINSTANCE hInstance, int nCmdShow) {
 
   RootWindowConfig window_config;
   window_config.always_on_top = command_line->HasSwitch(switches::kAlwaysOnTop);
-  window_config.with_controls =
-      !command_line->HasSwitch(switches::kHideControls);
+  // window_config.with_controls = !command_line->HasSwitch(switches::kHideControls);
+  window_config.with_controls = false;
   window_config.with_osr = settings.windowless_rendering_enabled ? true : false;
 
   // Create the first window.
