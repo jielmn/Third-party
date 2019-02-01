@@ -99,6 +99,8 @@ int RunMain(HINSTANCE hInstance, int nCmdShow) {
   window_config.with_controls = !command_line->HasSwitch(switches::kHideControls);
   // window_config.with_controls = false;
   window_config.with_osr = settings.windowless_rendering_enabled ? true : false;
+  window_config.with_caption = !command_line->HasSwitch("hide-caption");
+  window_config.url = command_line->GetSwitchValue("url");
 
   // Create the first window.
   context->GetRootWindowManager()->CreateRootWindow(window_config);

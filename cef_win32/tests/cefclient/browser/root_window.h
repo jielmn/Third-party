@@ -57,6 +57,8 @@ struct RootWindowConfig {
 
   // Initial URL to load.
   std::string url;
+
+  bool with_caption;
 };
 
 typedef std::set<CefRefPtr<CefExtension>> ExtensionSet;

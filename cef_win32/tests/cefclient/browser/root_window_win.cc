@@ -102,7 +102,8 @@ int GetURLBarHeight(HWND hwnd) {
 }  // namespace
 
 RootWindowWin::RootWindowWin()
-    : with_controls_(false),
+    : with_caption_(false),
+	  with_controls_(false),
       always_on_top_(false),
       with_osr_(false),
       with_extension_(false),
@@ -152,6 +153,7 @@ void RootWindowWin::Init(RootWindow::Delegate* delegate,
   DCHECK(!initialized_);
 
   delegate_ = delegate;
+  with_caption_ = config.with_caption;
   with_controls_ = config.with_controls;
   always_on_top_ = config.always_on_top;
   with_osr_ = config.with_osr;
@@ -358,6 +360,13 @@ void RootWindowWin::CreateRootWindow(const CefBrowserSettings& settings,
   CreateWindowEx(dwExStyle, window_class.c_str(), window_title.c_str(), dwStyle,
                  x, y, width, height, NULL, NULL, hInstance, this);
   CHECK(hwnd_);
+
+  if (!with_caption_) {
+	  LONG_PTR Style = ::GetWindowLongPtr(hwnd_, GWL_STYLE);
+	  Style = Style &~WS_CAPTION &~WS_SYSMENU &~WS_SIZEBOX;
+	  ::SetWindowLongPtr(hwnd_, GWL_STYLE, Style);
+  }
+
 
   if (!called_enable_non_client_dpi_scaling_ && IsProcessPerMonitorDpiAware()) {
     // This call gets Windows to scale the non-client area when WM_DPICHANGED
