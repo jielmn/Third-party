@@ -103,6 +103,8 @@ int RunMain(HINSTANCE hInstance, int nCmdShow) {
   window_config.with_osr = settings.windowless_rendering_enabled ? true : false;
   window_config.with_caption = !command_line->HasSwitch("hide-caption");
   window_config.url = command_line->GetSwitchValue("url");
+  if (0 == window_config.url.length())
+	  window_config.url = "www.baidu.com";
   g_disable_popup = command_line->HasSwitch("disable-popup");
 
   // Create the first window.
