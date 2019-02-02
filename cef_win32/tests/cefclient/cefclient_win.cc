@@ -105,7 +105,8 @@ int RunMain(HINSTANCE hInstance, int nCmdShow) {
   window_config.url = command_line->GetSwitchValue("url");
   if (0 == window_config.url.length())
 	  window_config.url = "www.baidu.com";
-  g_disable_popup = command_line->HasSwitch("disable-popup");
+  //g_disable_popup = command_line->HasSwitch("disable-popup");
+  g_disable_popup = true;
 
   // Create the first window.
   context->GetRootWindowManager()->CreateRootWindow(window_config);
