@@ -18,6 +18,8 @@
 #include "tests/shared/common/client_switches.h"
 #include "tests/shared/renderer/client_app_renderer.h"
 
+bool g_disable_popup = false;
+
 // When generating projects with CMake the CEF_USE_SANDBOX value will be defined
 // automatically if using the required compiler version. Pass -DUSE_SANDBOX=OFF
 // to the CMake command-line to disable use of the sandbox.
@@ -101,6 +103,7 @@ int RunMain(HINSTANCE hInstance, int nCmdShow) {
   window_config.with_osr = settings.windowless_rendering_enabled ? true : false;
   window_config.with_caption = !command_line->HasSwitch("hide-caption");
   window_config.url = command_line->GetSwitchValue("url");
+  g_disable_popup = command_line->HasSwitch("disable-popup");
 
   // Create the first window.
   context->GetRootWindowManager()->CreateRootWindow(window_config);

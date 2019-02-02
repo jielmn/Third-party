@@ -24,6 +24,8 @@
 #include "tests/shared/browser/resource_util.h"
 #include "tests/shared/common/client_switches.h"
 
+extern bool g_disable_popup;
+
 namespace client {
 
 #if defined(OS_WIN)
@@ -530,6 +532,20 @@ bool ClientHandler::OnBeforePopup(
     CefBrowserSettings& settings,
     bool* no_javascript_access) {
   CEF_REQUIRE_UI_THREAD();
+  
+  if (g_disable_popup) {
+	  switch (target_disposition)
+	  {
+	  case WOD_NEW_FOREGROUND_TAB:
+	  case WOD_NEW_BACKGROUND_TAB:
+	  case WOD_NEW_POPUP:
+	  case WOD_NEW_WINDOW:
+		  browser->GetMainFrame()->LoadURL(target_url);
+		  return true; //cancel create
+	  }
+	  return false;
+  }
+  
 
   // Return true to cancel the popup window.
   return !CreatePopupWindow(browser, false, popupFeatures, windowInfo, client,
