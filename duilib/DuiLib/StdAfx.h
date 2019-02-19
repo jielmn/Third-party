@@ -61,6 +61,9 @@
 #define MIN min
 #define CLAMP(x,a,b) (MIN(b,MAX(a,x)))
 
+// 不确定的改动，便于改回去
+#define NOT_SURE_DEBUG1_FLAG
+
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

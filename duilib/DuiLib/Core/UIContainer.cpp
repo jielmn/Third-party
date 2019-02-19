@@ -409,6 +409,10 @@ namespace DuiLib
 			if( !pControl->IsVisible() ) continue;
 			if( pControl->IsFloat() ) continue;
 			pControl->Move(CDuiSize(-cx, -cy), false);
+#ifdef NOT_SURE_DEBUG1_FLAG
+			if (!pControl->IsFloat()) pControl->SetPos(pControl->GetPos(), false);
+			else pControl->SetPos(pControl->GetRelativePos(), false);
+#endif
 		}
 
 		Invalidate();
@@ -1050,10 +1054,15 @@ namespace DuiLib
 						m_pVerticalScrollBar->SetVisible(false);
 						m_pVerticalScrollBar->SetScrollPos(0);
 					}
+#ifndef NOT_SURE_DEBUG1_FLAG
 					if( iScrollPos > m_pVerticalScrollBar->GetScrollPos() ) {
 						if( !IsFloat() ) SetPos(GetPos(), false);
 						else SetPos(GetRelativePos(), false);
 					}
+#else
+					if (!IsFloat()) SetPos(GetPos(), false);
+					else SetPos(GetRelativePos(), false);
+#endif
 				}
 			}
 		}
