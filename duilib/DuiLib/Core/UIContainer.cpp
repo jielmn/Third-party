@@ -927,10 +927,15 @@ namespace DuiLib
 							m_pHorizontalScrollBar->SetVisible(false);
 							m_pHorizontalScrollBar->SetScrollPos(0);
 						}
+#ifndef NOT_SURE_DEBUG1_FLAG
 						if( iScrollPos > m_pHorizontalScrollBar->GetScrollPos() ) {
 							if( !IsFloat() ) SetPos(GetPos(), false);
 							else SetPos(GetRelativePos(), false);
 						}
+#else
+						if (!IsFloat()) SetPos(GetPos(), false);
+						else SetPos(GetRelativePos(), false);
+#endif
 					}
 				}
 				return;
