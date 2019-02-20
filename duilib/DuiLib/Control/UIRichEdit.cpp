@@ -922,7 +922,7 @@ void CTxtWinHost::SetClientRect(RECT *prc)
     sizelExtent.cx = DXtoHimetricX(rcClient.right - rcClient.left, xPerInch);
     sizelExtent.cy = DYtoHimetricY(rcClient.bottom - rcClient.top, yPerInch);
 
-    pserv->OnTxPropertyBitsChange(TXTBIT_VIEWINSETCHANGE, TXTBIT_VIEWINSETCHANGE);
+    //pserv->OnTxPropertyBitsChange(TXTBIT_VIEWINSETCHANGE, TXTBIT_VIEWINSETCHANGE);
 }
 
 BOOL CTxtWinHost::SetSaveSelection(BOOL f_SaveSelection)
