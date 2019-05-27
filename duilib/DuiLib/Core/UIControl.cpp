@@ -40,6 +40,10 @@ m_nTooltipWidth(300)
     ::ZeroMemory(&m_rcPaint, sizeof(RECT));
 	::ZeroMemory(&m_rcBorderSize,sizeof(RECT));
 	m_piFloatPercent.left = m_piFloatPercent.top = m_piFloatPercent.right = m_piFloatPercent.bottom = 0.0f;
+
+#ifdef ONLY_ONCE_DOINIT
+	m_bInitiated = false;
+#endif
 }
 
 CControlUI::~CControlUI()
@@ -812,8 +816,17 @@ DWORD CControlUI::GetAdjustColor(DWORD dwColor)
 
 void CControlUI::Init()
 {
-    DoInit();
-    if( OnInit ) OnInit(this);
+#ifdef ONLY_ONCE_DOINIT
+	// 只需初始化一次
+	if ( !m_bInitiated) {
+		DoInit();
+		if (OnInit) OnInit(this);
+		m_bInitiated = true;
+	}
+#else
+	DoInit();
+	if (OnInit) OnInit(this);
+#endif
 }
 
 void CControlUI::DoInit()

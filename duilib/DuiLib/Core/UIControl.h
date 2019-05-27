@@ -224,6 +224,11 @@ protected:
     RECT m_rcPaint;
 	RECT m_rcBorderSize;
 	CDuiStringPtrMap m_mCustomAttrHash;
+
+#ifdef ONLY_ONCE_DOINIT
+	bool  m_bInitiated;
+#endif
+
 };
 
 } // namespace DuiLib

@@ -52,6 +52,17 @@
 #define _WIN32_WINNT 0x0500
 #endif
 
+
+/************ 不确定的修改 ******************/
+/*
+控件的doinit。在父控件add子控件时，会重新一次doinit
+控制只初始化一次。
+*/
+#define ONLY_ONCE_DOINIT 
+
+
+
+
 #include "UIlib.h"
 
 #include <olectl.h>
@@ -61,7 +72,7 @@
 #define MIN min
 #define CLAMP(x,a,b) (MIN(b,MAX(a,x)))
 
-// 不确定的改动，便于改回去
+// 不确定的改动，便于改回去(修改flot属性相关的)
 #define NOT_SURE_DEBUG1_FLAG
 
 //{{AFX_INSERT_LOCATION}}
