@@ -72,8 +72,15 @@
 #define MIN min
 #define CLAMP(x,a,b) (MIN(b,MAX(a,x)))
 
-// 不确定的改动，便于改回去(修改flot属性相关的)
+// 以下是不确定的改动，便于改回去
+
+//     修改flot属性相关的
 #define NOT_SURE_DEBUG1_FLAG
+
+// Control的自绘地方，设置clip，限制绘制的矩形区域，不让出界绘制
+#define CONTROL_RESTRICT_REDRAW_CLIP
+
+// END(不确定的改动)
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

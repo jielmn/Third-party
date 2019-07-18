@@ -1092,6 +1092,13 @@ bool CControlUI::DoPaint(HDC hDC, const RECT& rcPaint, CControlUI* pStopControl)
         PaintBorder(hDC);
     }
     else {
+#ifdef CONTROL_RESTRICT_REDRAW_CLIP
+		RECT rcTemp = { 0 };
+		if (!::IntersectRect(&rcTemp, &rcPaint, &m_rcItem)) return true;
+		CRenderClip clip;
+		CRenderClip::GenerateClip(hDC, rcTemp, clip);
+#endif
+
         PaintBkColor(hDC);
         PaintBkImage(hDC);
         PaintStatusImage(hDC);
