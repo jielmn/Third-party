@@ -825,8 +825,10 @@ namespace DuiLib
 				}
 			}
 			else {
+#ifndef CONTROL_RESTRICT_REDRAW_CLIP
 				CRenderClip childClip;
 				CRenderClip::GenerateClip(hDC, rcTemp, childClip);
+#endif
 				for( int it = 0; it < m_items.GetSize(); it++ ) {
 					CControlUI* pControl = static_cast<CControlUI*>(m_items[it]);
 					if( pControl == pStopControl ) return false;
@@ -834,9 +836,13 @@ namespace DuiLib
 					if( !::IntersectRect(&rcTemp, &rcPaint, &pControl->GetPos()) ) continue;
 					if( pControl->IsFloat() ) {
 						if( !::IntersectRect(&rcTemp, &m_rcItem, &pControl->GetPos()) ) continue;
+#ifndef CONTROL_RESTRICT_REDRAW_CLIP
 						CRenderClip::UseOldClipBegin(hDC, childClip);
+#endif
                         if( !pControl->Paint(hDC, rcPaint, pStopControl) ) return false;
+#ifndef CONTROL_RESTRICT_REDRAW_CLIP
 						CRenderClip::UseOldClipEnd(hDC, childClip);
+#endif
 					}
 					else {
 						if( !::IntersectRect(&rcTemp, &rc, &pControl->GetPos()) ) continue;
