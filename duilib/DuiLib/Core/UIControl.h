@@ -3,6 +3,14 @@
 
 #pragma once
 
+// 在CControl的DoPaint中，限制绘制的区域 
+#define  SET_CLIP_REGION_ON_PAINT(rcPaint) \
+             RECT rcTemp_ = { 0 }; \
+             if (!::IntersectRect(&rcTemp_, &rcPaint, &m_rcItem)) return true; \
+             CRenderClip clip; \
+             CRenderClip::GenerateClip(hDC, rcTemp_, clip)
+
+
 namespace DuiLib {
 
 /////////////////////////////////////////////////////////////////////////////////////
