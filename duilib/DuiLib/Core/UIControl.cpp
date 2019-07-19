@@ -1138,7 +1138,7 @@ void CControlUI::PaintText(HDC hDC)
 
 void CControlUI::PaintBorder(HDC hDC)
 {
-	if(m_rcBorderSize.left > 0 && (m_dwBorderColor != 0 || m_dwFocusBorderColor != 0)) {
+	if( (m_rcBorderSize.left > 0 || m_rcBorderSize.right > 0 || m_rcBorderSize.top > 0 || m_rcBorderSize.right > 0 ) && (m_dwBorderColor != 0 || m_dwFocusBorderColor != 0)) {
 		if( m_cxyBorderRound.cx > 0 || m_cxyBorderRound.cy > 0 )//画圆角边框
 		{
 			if (IsFocused() && m_dwFocusBorderColor != 0)
@@ -1155,10 +1155,9 @@ void CControlUI::PaintBorder(HDC hDC)
 			}
 			else {
 				RECT rcBorder;
-				if(m_rcBorderSize.left > 0){
+				if(m_rcBorderSize.left > 0){					
 					rcBorder		= m_rcItem;
-                    rcBorder.left  += m_rcBorderSize.left / 2;
-					rcBorder.right	= rcBorder.left;
+					rcBorder.right	= rcBorder.left + m_rcBorderSize.left - 1;
 					if (IsFocused() && m_dwFocusBorderColor != 0)
 						CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.left,GetAdjustColor(m_dwFocusBorderColor),m_nBorderStyle);
 					else
@@ -1166,10 +1165,7 @@ void CControlUI::PaintBorder(HDC hDC)
 				}
 				if(m_rcBorderSize.top > 0) {
 					rcBorder		= m_rcItem;
-                    rcBorder.top   += m_rcBorderSize.top / 2;
-					rcBorder.bottom	= rcBorder.top;
-                    rcBorder.left  += m_rcBorderSize.left;
-                    rcBorder.right -= m_rcBorderSize.right;
+					rcBorder.bottom	= rcBorder.top + m_rcBorderSize.top - 1;
 					if (IsFocused() && m_dwFocusBorderColor != 0)
 						CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.top,GetAdjustColor(m_dwFocusBorderColor),m_nBorderStyle);
 					else
@@ -1177,8 +1173,8 @@ void CControlUI::PaintBorder(HDC hDC)
 				}
 				if(m_rcBorderSize.right > 0) {
 					rcBorder		= m_rcItem;
-					rcBorder.left	= m_rcItem.right - m_rcBorderSize.right / 2;
-                    rcBorder.right  = rcBorder.left;
+					rcBorder.right--;
+					rcBorder.left	= rcBorder.right - m_rcBorderSize.right + 1;
 					if (IsFocused() && m_dwFocusBorderColor != 0)
 						CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.right,GetAdjustColor(m_dwFocusBorderColor),m_nBorderStyle);
 					else
@@ -1186,10 +1182,8 @@ void CControlUI::PaintBorder(HDC hDC)
 				}
 				if(m_rcBorderSize.bottom > 0) {
 					rcBorder		= m_rcItem;
-					rcBorder.top	= m_rcItem.bottom - m_rcBorderSize.bottom / 2;
-                    rcBorder.bottom = rcBorder.top;
-                    rcBorder.left  += m_rcBorderSize.left;
-                    rcBorder.right -= m_rcBorderSize.right;
+					rcBorder.bottom--;
+					rcBorder.top	= rcBorder.bottom - m_rcBorderSize.bottom + 1;
 					if (IsFocused() && m_dwFocusBorderColor != 0)
 						CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.bottom,GetAdjustColor(m_dwFocusBorderColor),m_nBorderStyle);
 					else
