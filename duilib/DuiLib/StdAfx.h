@@ -77,9 +77,6 @@
 //     修改flot属性相关的
 #define NOT_SURE_DEBUG1_FLAG
 
-// Control的自绘地方，设置clip，限制绘制的矩形区域，不让出界绘制
-#define CONTROL_RESTRICT_REDRAW_CLIP
-
 // END(不确定的改动)
 
 //{{AFX_INSERT_LOCATION}}
