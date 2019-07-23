@@ -546,6 +546,14 @@ void CControlUI::SetMaxHeight(int cy)
     NeedParentUpdate();
 }
 
+// 鼠标在本控件的位置(在MouseMove事件中用的上)
+POINT  CControlUI::Mouse2Client(POINT ptMouse) {
+	POINT  pt;
+	pt.x = ptMouse.x - m_rcItem.left;
+	pt.y = ptMouse.y - m_rcItem.top;
+	return pt;
+}
+
 CDuiString CControlUI::GetToolTip() const
 {
     return m_sToolTip;

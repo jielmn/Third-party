@@ -101,6 +101,8 @@ public:
     virtual void SetMinHeight(int cy);
     virtual int GetMaxHeight() const;
     virtual void SetMaxHeight(int cy);
+	// 鼠标在本控件的位置
+	POINT  Mouse2Client(POINT ptMouse);
 
     // 鼠标提示
     virtual CDuiString GetToolTip() const;
