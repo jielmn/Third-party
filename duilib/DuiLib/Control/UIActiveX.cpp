@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 
+#define  ACTIVEX_TRACE_FLAG    0
+
 namespace DuiLib {
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -368,7 +370,9 @@ STDMETHODIMP_(ULONG) CActiveXCtrl::Release()
 
 STDMETHODIMP CActiveXCtrl::SetSite(IUnknown *pUnkSite)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::SetSite"));
+#endif
     if( m_pUnkSite != NULL ) {
         m_pUnkSite->Release();
         m_pUnkSite = NULL;
@@ -382,7 +386,9 @@ STDMETHODIMP CActiveXCtrl::SetSite(IUnknown *pUnkSite)
 
 STDMETHODIMP CActiveXCtrl::GetSite(REFIID riid, LPVOID* ppvSite)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::GetSite"));
+#endif
     if( ppvSite == NULL ) return E_POINTER;
     *ppvSite = NULL;
     if( m_pUnkSite == NULL ) return E_FAIL;
@@ -391,20 +397,26 @@ STDMETHODIMP CActiveXCtrl::GetSite(REFIID riid, LPVOID* ppvSite)
 
 STDMETHODIMP CActiveXCtrl::SaveObject(void)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::SaveObject"));
+#endif
     return E_NOTIMPL;
 }
 
 STDMETHODIMP CActiveXCtrl::GetMoniker(DWORD dwAssign, DWORD dwWhichMoniker, IMoniker** ppmk)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::GetMoniker"));
+#endif
     if( ppmk != NULL ) *ppmk = NULL;
     return E_NOTIMPL;
 }
 
 STDMETHODIMP CActiveXCtrl::GetContainer(IOleContainer** ppContainer)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::GetContainer"));
+#endif
     if( ppContainer == NULL ) return E_POINTER;
     *ppContainer = NULL;
     HRESULT Hr = E_NOTIMPL;
@@ -415,7 +427,9 @@ STDMETHODIMP CActiveXCtrl::GetContainer(IOleContainer** ppContainer)
 
 STDMETHODIMP CActiveXCtrl::ShowObject(void)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::ShowObject"));
+#endif
     if( m_pOwner == NULL ) return E_UNEXPECTED;
     HDC hDC = ::GetDC(m_pOwner->m_hwndHost);
     if( hDC == NULL ) return E_FAIL;
@@ -426,32 +440,42 @@ STDMETHODIMP CActiveXCtrl::ShowObject(void)
 
 STDMETHODIMP CActiveXCtrl::OnShowWindow(BOOL fShow)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::OnShowWindow"));
+#endif
     return E_NOTIMPL;
 }
 
 STDMETHODIMP CActiveXCtrl::RequestNewObjectLayout(void)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::RequestNewObjectLayout"));
+#endif
     return E_NOTIMPL;
 }
 
 STDMETHODIMP CActiveXCtrl::CanWindowlessActivate(void)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::CanWindowlessActivate"));
+#endif
     return S_OK;  // Yes, we can!!
 }
 
 STDMETHODIMP CActiveXCtrl::GetCapture(void)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::GetCapture"));
+#endif
     if( m_pOwner == NULL ) return E_UNEXPECTED;
     return m_bCaptured ? S_OK : S_FALSE;
 }
 
 STDMETHODIMP CActiveXCtrl::SetCapture(BOOL fCapture)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::SetCapture"));
+#endif
     if( m_pOwner == NULL ) return E_UNEXPECTED;
     m_bCaptured = (fCapture == TRUE);
     if( fCapture ) ::SetCapture(m_pOwner->m_hwndHost); else ::ReleaseCapture();
@@ -460,14 +484,18 @@ STDMETHODIMP CActiveXCtrl::SetCapture(BOOL fCapture)
 
 STDMETHODIMP CActiveXCtrl::GetFocus(void)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::GetFocus"));
+#endif
     if( m_pOwner == NULL ) return E_UNEXPECTED;
     return m_bFocused ? S_OK : S_FALSE;
 }
 
 STDMETHODIMP CActiveXCtrl::SetFocus(BOOL fFocus)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::SetFocus"));
+#endif
     if( m_pOwner == NULL ) return E_UNEXPECTED;
     if( fFocus ) m_pOwner->SetFocus();
     m_bFocused = (fFocus == TRUE);
@@ -476,7 +504,9 @@ STDMETHODIMP CActiveXCtrl::SetFocus(BOOL fFocus)
 
 STDMETHODIMP CActiveXCtrl::GetDC(LPCRECT pRect, DWORD grfFlags, HDC* phDC)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::GetDC"));
+#endif
     if( phDC == NULL ) return E_POINTER;
     if( m_pOwner == NULL ) return E_UNEXPECTED;
 	if( m_bWindowless ) return S_FALSE;
@@ -491,7 +521,9 @@ STDMETHODIMP CActiveXCtrl::GetDC(LPCRECT pRect, DWORD grfFlags, HDC* phDC)
 
 STDMETHODIMP CActiveXCtrl::ReleaseDC(HDC hDC)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::ReleaseDC"));
+#endif
     if( m_pOwner == NULL ) return E_UNEXPECTED;
     ::ReleaseDC(m_pOwner->m_hwndHost, hDC);
     return S_OK;
@@ -499,7 +531,9 @@ STDMETHODIMP CActiveXCtrl::ReleaseDC(HDC hDC)
 
 STDMETHODIMP CActiveXCtrl::InvalidateRect(LPCRECT pRect, BOOL fErase)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::InvalidateRect"));
+#endif
     if( m_pOwner == NULL ) return E_UNEXPECTED;
     if( m_pOwner->m_hwndHost == NULL ) return E_FAIL;
     return ::InvalidateRect(m_pOwner->m_hwndHost, pRect, fErase) ? S_OK : E_FAIL;
@@ -507,26 +541,34 @@ STDMETHODIMP CActiveXCtrl::InvalidateRect(LPCRECT pRect, BOOL fErase)
 
 STDMETHODIMP CActiveXCtrl::InvalidateRgn(HRGN hRGN, BOOL fErase)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::InvalidateRgn"));
+#endif
     if( m_pOwner == NULL ) return E_UNEXPECTED;
     return ::InvalidateRgn(m_pOwner->m_hwndHost, hRGN, fErase) ? S_OK : E_FAIL;
 }
 
 STDMETHODIMP CActiveXCtrl::ScrollRect(INT dx, INT dy, LPCRECT pRectScroll, LPCRECT pRectClip)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::ScrollRect"));
+#endif
     return S_OK;
 }
 
 STDMETHODIMP CActiveXCtrl::AdjustRect(LPRECT prc)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::AdjustRect"));
+#endif
     return S_OK;
 }
 
 STDMETHODIMP CActiveXCtrl::OnDefWindowMessage(UINT msg, WPARAM wParam, LPARAM lParam, LRESULT* plResult)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::OnDefWindowMessage"));
+#endif
     if( m_pOwner == NULL ) return E_UNEXPECTED;
     *plResult = ::DefWindowProc(m_pOwner->m_hwndHost, msg, wParam, lParam);
     return S_OK;
@@ -534,7 +576,9 @@ STDMETHODIMP CActiveXCtrl::OnDefWindowMessage(UINT msg, WPARAM wParam, LPARAM lP
 
 STDMETHODIMP CActiveXCtrl::OnInPlaceActivateEx(BOOL* pfNoRedraw, DWORD dwFlags)        
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::OnInPlaceActivateEx"));
+#endif
     ASSERT(m_pInPlaceObject==NULL);
     if( m_pOwner == NULL ) return E_UNEXPECTED;
     if( m_pOwner->m_pUnk == NULL ) return E_UNEXPECTED;
@@ -564,7 +608,9 @@ STDMETHODIMP CActiveXCtrl::OnInPlaceActivateEx(BOOL* pfNoRedraw, DWORD dwFlags)
 
 STDMETHODIMP CActiveXCtrl::OnInPlaceDeactivateEx(BOOL fNoRedraw)       
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::OnInPlaceDeactivateEx"));
+#endif
     m_bInPlaceActive = false;
     if( m_pInPlaceObject != NULL ) {
         m_pInPlaceObject->Release();
@@ -580,33 +626,43 @@ STDMETHODIMP CActiveXCtrl::OnInPlaceDeactivateEx(BOOL fNoRedraw)
 
 STDMETHODIMP CActiveXCtrl::RequestUIActivate(void)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::RequestUIActivate"));
+#endif
     return S_OK;
 }
 
 STDMETHODIMP CActiveXCtrl::CanInPlaceActivate(void)       
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::CanInPlaceActivate"));
+#endif
     return S_OK;
 }
 
 STDMETHODIMP CActiveXCtrl::OnInPlaceActivate(void)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::OnInPlaceActivate"));
+#endif
     BOOL bDummy = FALSE;
     return OnInPlaceActivateEx(&bDummy, 0);
 }
 
 STDMETHODIMP CActiveXCtrl::OnUIActivate(void)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::OnUIActivate"));
+#endif
     m_bUIActivated = true;
     return S_OK;
 }
 
 STDMETHODIMP CActiveXCtrl::GetWindowContext(IOleInPlaceFrame** ppFrame, IOleInPlaceUIWindow** ppDoc, LPRECT lprcPosRect, LPRECT lprcClipRect, LPOLEINPLACEFRAMEINFO lpFrameInfo)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::GetWindowContext"));
+#endif
     if( ppDoc == NULL ) return E_POINTER;
     if( ppFrame == NULL ) return E_POINTER;
     if( lprcPosRect == NULL ) return E_POINTER;
@@ -630,44 +686,58 @@ STDMETHODIMP CActiveXCtrl::GetWindowContext(IOleInPlaceFrame** ppFrame, IOleInPl
 
 STDMETHODIMP CActiveXCtrl::Scroll(SIZE scrollExtant)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::Scroll"));
+#endif
     return E_NOTIMPL;
 }
 
 STDMETHODIMP CActiveXCtrl::OnUIDeactivate(BOOL fUndoable)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::OnUIDeactivate"));
+#endif
     m_bUIActivated = false;
     return S_OK;
 }
 
 STDMETHODIMP CActiveXCtrl::OnInPlaceDeactivate(void)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::OnInPlaceDeactivate"));
+#endif
     return OnInPlaceDeactivateEx(TRUE);
 }
 
 STDMETHODIMP CActiveXCtrl::DiscardUndoState(void)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::DiscardUndoState"));
+#endif
     return E_NOTIMPL;
 }
 
 STDMETHODIMP CActiveXCtrl::DeactivateAndUndo(void)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::DeactivateAndUndo"));
+#endif
     return E_NOTIMPL;
 }
 
 STDMETHODIMP CActiveXCtrl::OnPosRectChange(LPCRECT lprcPosRect)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::OnPosRectChange"));
+#endif
     return E_NOTIMPL;
 }
 
 STDMETHODIMP CActiveXCtrl::GetWindow(HWND* phwnd)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::GetWindow"));
+#endif
     if( m_pOwner == NULL ) return E_UNEXPECTED;
     if( m_pOwner->m_hwndHost == NULL ) CreateActiveXWnd();
     if( m_pOwner->m_hwndHost == NULL ) return E_FAIL;
@@ -677,25 +747,33 @@ STDMETHODIMP CActiveXCtrl::GetWindow(HWND* phwnd)
 
 STDMETHODIMP CActiveXCtrl::ContextSensitiveHelp(BOOL fEnterMode)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::ContextSensitiveHelp"));
+#endif
     return S_OK;
 }
 
 STDMETHODIMP CActiveXCtrl::OnControlInfoChanged(void)      
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::OnControlInfoChanged"));
+#endif
     return S_OK;
 }
 
 STDMETHODIMP CActiveXCtrl::LockInPlaceActive(BOOL fLock)       
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::LockInPlaceActive"));
+#endif
     return S_OK;
 }
 
 STDMETHODIMP CActiveXCtrl::GetExtendedControl(IDispatch** ppDisp)        
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::GetExtendedControl"));
+#endif
     if( ppDisp == NULL ) return E_POINTER;   
     if( m_pOwner == NULL ) return E_UNEXPECTED;
     if( m_pOwner->m_pUnk == NULL ) return E_UNEXPECTED;
@@ -704,32 +782,42 @@ STDMETHODIMP CActiveXCtrl::GetExtendedControl(IDispatch** ppDisp)
 
 STDMETHODIMP CActiveXCtrl::TransformCoords(POINTL* pPtlHimetric, POINTF* pPtfContainer, DWORD dwFlags)       
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::TransformCoords"));
+#endif
     return S_OK;
 }
 
 STDMETHODIMP CActiveXCtrl::TranslateAccelerator(MSG *pMsg, DWORD grfModifiers)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::TranslateAccelerator"));
+#endif
     return S_FALSE;
 }
 
 STDMETHODIMP CActiveXCtrl::OnFocus(BOOL fGotFocus)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::OnFocus"));
+#endif
     m_bFocused = (fGotFocus == TRUE);
     return S_OK;
 }
 
 STDMETHODIMP CActiveXCtrl::ShowPropertyFrame(void)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::ShowPropertyFrame"));
+#endif
     return E_NOTIMPL;
 }
 
 STDMETHODIMP CActiveXCtrl::EnumObjects(DWORD grfFlags, IEnumUnknown** ppenum)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::EnumObjects"));
+#endif
     if( ppenum == NULL ) return E_POINTER;
     if( m_pOwner == NULL ) return E_UNEXPECTED;
     *ppenum = new CActiveXEnum(m_pOwner->m_pUnk);
@@ -738,14 +826,18 @@ STDMETHODIMP CActiveXCtrl::EnumObjects(DWORD grfFlags, IEnumUnknown** ppenum)
 
 STDMETHODIMP CActiveXCtrl::LockContainer(BOOL fLock)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::LockContainer"));
+#endif
     m_bLocked = fLock != FALSE;
     return S_OK;
 }
 
 STDMETHODIMP CActiveXCtrl::ParseDisplayName(IBindCtx *pbc, LPOLESTR pszDisplayName, ULONG* pchEaten, IMoniker** ppmkOut)
 {
+#if ACTIVEX_TRACE_FLAG
     DUITRACE(_T("AX: CActiveXCtrl::ParseDisplayName"));
+#endif
     return E_NOTIMPL;
 }
 
