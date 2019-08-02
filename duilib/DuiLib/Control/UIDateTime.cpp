@@ -152,6 +152,17 @@ namespace DuiLib
 				m_pOwner->GetManager()->AddNativeWindow(m_pOwner, m_hWnd);
 			}
 			bHandled = FALSE;
+		} 
+		else if (uMsg == WM_NOTIFY) {
+			bHandled = FALSE;
+			NMHDR* pHeader = (NMHDR*)lParam;
+			if (pHeader->code == MCN_SELCHANGE) {
+				NMSELCHANGE * pChange = (NMSELCHANGE *)lParam;
+				// SYSTEMTIME s = pChange->stSelStart;
+				m_pOwner->m_sysTime = pChange->stSelStart;
+				//::SendMessage(m_hWnd, DTM_GETSYSTEMTIME, 0, (LPARAM)&m_pOwner->m_sysTime);
+				m_pOwner->GetManager()->SendNotify(m_pOwner, DUI_MSGTYPE_TEXTCHANGED);
+			}
 		}
 		else bHandled = FALSE;
 		if( !bHandled ) return CWindowWnd::HandleMessage(uMsg, wParam, lParam);
