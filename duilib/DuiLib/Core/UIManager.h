@@ -3,6 +3,9 @@
 
 #pragma once
 
+//     修改tooltip相关的闪烁的bug
+#define    TOOLTIP_DEBUG_FLAG
+
 namespace DuiLib {
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -436,7 +439,9 @@ private:
     CControlUI* m_pEventHover;
     CControlUI* m_pEventClick;
     CControlUI* m_pEventKey;
+#ifndef TOOLTIP_DEBUG_FLAG
     CControlUI* m_pLastToolTip;
+#endif
     //
     POINT m_ptLastMousePos;
     SIZE m_szMinWindow;

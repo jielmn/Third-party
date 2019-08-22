@@ -111,7 +111,9 @@ m_pFocus(NULL),
 m_pEventHover(NULL),
 m_pEventClick(NULL),
 m_pEventKey(NULL),
+#ifndef TOOLTIP_DEBUG_FLAG
 m_pLastToolTip(NULL),
+#endif
 m_bFirstLayout(true),
 m_bFocusNeeded(false),
 m_bUpdateNeeded(false),
@@ -196,7 +198,9 @@ CPaintManagerUI::~CPaintManagerUI()
 		::DestroyWindow(m_hwndTooltip);
 		m_hwndTooltip = NULL;
 	}
+#ifndef TOOLTIP_DEBUG_FLAG
     m_pLastToolTip = NULL;
+#endif
     if( m_hDcOffscreen != NULL ) ::DeleteDC(m_hDcOffscreen);
     if( m_hDcBackground != NULL ) ::DeleteDC(m_hDcBackground);
     if( m_hbmpOffscreen != NULL ) ::DeleteObject(m_hbmpOffscreen);
@@ -1200,6 +1204,8 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
                 ::SendMessage(m_hwndTooltip, TTM_TRACKACTIVATE, TRUE, (LPARAM)&m_ToolTip);
 
             }
+
+#ifndef TOOLTIP_DEBUG_FLAG
             // by jiangdong 2016-8-6 修改tooltip 悬停时候 闪烁bug
             if (m_pLastToolTip == NULL) {
                 m_pLastToolTip = pHover;
@@ -1222,6 +1228,11 @@ bool CPaintManagerUI::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LR
             }
             //修改在CListElementUI 有提示 子项无提示下无法跟随移动！（按理说不应该移动的）
             ::SendMessage(m_hwndTooltip, TTM_TRACKPOSITION, 0, (LPARAM)(DWORD)MAKELONG(pt.x, pt.y));
+#else
+			::SendMessage(m_hwndTooltip, TTM_SETMAXTIPWIDTH, 0, pHover->GetToolTipWidth());
+			::SendMessage(m_hwndTooltip, TTM_SETTOOLINFO, 0, (LPARAM)&m_ToolTip);
+			::SendMessage(m_hwndTooltip, TTM_TRACKACTIVATE, TRUE, (LPARAM)&m_ToolTip);
+#endif
     }
         return true;
     case WM_MOUSELEAVE:
@@ -1609,7 +1620,9 @@ bool CPaintManagerUI::AttachDialog(CControlUI* pControl)
     m_pEventKey = NULL;
     m_pEventHover = NULL;
     m_pEventClick = NULL;
+#ifndef TOOLTIP_DEBUG_FLAG
     m_pLastToolTip = NULL;
+#endif
     // Remove the existing control-tree. We might have gotten inside this function as
     // a result of an event fired or similar, so we cannot just delete the objects and
     // pull the internal memory of the calling code. We'll delay the cleanup.
