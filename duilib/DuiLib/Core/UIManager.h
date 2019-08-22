@@ -441,6 +441,8 @@ private:
     CControlUI* m_pEventKey;
 #ifndef TOOLTIP_DEBUG_FLAG
     CControlUI* m_pLastToolTip;
+#else
+	CDuiString  m_strLastToolTip;
 #endif
     //
     POINT m_ptLastMousePos;
