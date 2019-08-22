@@ -3,6 +3,16 @@
 
 #pragma once
 
+
+/************ 不确定的修改 ******************/
+/*
+控件的doinit。在父控件add子控件时，会重新一次doinit
+控制只初始化一次。
+*/
+#define ONLY_ONCE_DOINIT 
+
+
+
 // 在CControl的DoPaint中，限制绘制的区域 
 #define  SET_CLIP_REGION_ON_PAINT(rcPaint) \
              RECT rcTemp_ = { 0 }; \

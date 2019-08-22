@@ -69,13 +69,6 @@
 #include <stdio.h>
 
 
-/************ 不确定的修改 ******************/
-/*
-控件的doinit。在父控件add子控件时，会重新一次doinit
-控制只初始化一次。
-*/
-#define ONLY_ONCE_DOINIT 
-
 
 #include "Utils/Utils.h"
 #include "Utils/UIDelegate.h"
