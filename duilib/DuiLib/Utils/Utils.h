@@ -86,6 +86,7 @@ namespace DuiLib
         CDuiString ToString();
 
         void Empty();
+		void Trim();
         int GetLength() const;
         bool IsEmpty() const;
         TCHAR GetAt(int nIndex) const;

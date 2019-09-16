@@ -43,6 +43,9 @@ CListUI::CListUI() : m_pCallback(NULL), m_bScrollSelect(false), m_iCurSel(-1), m
     m_ListInfo.uFixedHeight = 0;
     m_ListInfo.nFont = -1;
     m_ListInfo.uTextStyle = DT_VCENTER | DT_SINGLELINE; // m_uTextStyle(DT_VCENTER | DT_END_ELLIPSIS)
+	for (int i = 0; i < UILIST_MAX_COLUMNS; i++) {
+		m_ListInfo.uTextStyleEx[i] = DT_VCENTER | DT_SINGLELINE;
+	}
     m_ListInfo.dwTextColor = 0xFF000000;
     m_ListInfo.dwBkColor = 0;
     m_ListInfo.bAlternateBk = false;
@@ -864,6 +867,52 @@ void CListUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
             m_ListInfo.uTextStyle |= DT_BOTTOM;
         }
     }
+	// 指定多列的文字对齐信息
+	else if (_tcscmp(pstrName, _T("itemalignex")) == 0) {
+
+		int nIndex = 0;
+		const char * pStart = pstrValue;
+		const char * pFind = strchr(pStart, ',');
+		while ( pFind ) {
+			int nLen = pFind - pStart;
+			CDuiString  strValue(pStart, nLen);
+			strValue.Trim();
+			if (nIndex < UILIST_MAX_COLUMNS) {
+				if (0 == strcmp(strValue, "left")) {
+					m_ListInfo.uTextStyleEx[nIndex] &= ~(DT_CENTER | DT_RIGHT);
+					m_ListInfo.uTextStyleEx[nIndex] |= DT_LEFT;
+				}
+				else if (0 == strcmp(strValue, "center")) {
+					m_ListInfo.uTextStyleEx[nIndex] &= ~(DT_LEFT | DT_RIGHT);
+					m_ListInfo.uTextStyleEx[nIndex] |= DT_CENTER;
+				}
+				else if (0 == strcmp(strValue, "right")) {
+					m_ListInfo.uTextStyleEx[nIndex] &= ~(DT_LEFT | DT_CENTER);
+					m_ListInfo.uTextStyleEx[nIndex] |= DT_RIGHT;
+				}
+			}
+			
+			pStart = pFind + 1;
+			pFind  = strchr(pStart, ',');			
+			nIndex++;
+		}
+
+		CDuiString  strValue(pStart);	
+		strValue.Trim();
+		if (nIndex < UILIST_MAX_COLUMNS) {
+			if ( 0 == strcmp(strValue, "left") ) {
+				m_ListInfo.uTextStyleEx[nIndex] &= ~(DT_CENTER | DT_RIGHT);
+				m_ListInfo.uTextStyleEx[nIndex] |= DT_LEFT;
+			} else if ( 0 == strcmp(strValue, "center") ) {
+				m_ListInfo.uTextStyleEx[nIndex] &= ~(DT_LEFT | DT_RIGHT);
+				m_ListInfo.uTextStyleEx[nIndex] |= DT_CENTER;
+			} else if (0 == strcmp(strValue, "right") ) {
+				m_ListInfo.uTextStyleEx[nIndex] &= ~(DT_LEFT | DT_CENTER);
+				m_ListInfo.uTextStyleEx[nIndex] |= DT_RIGHT;
+			}
+		}
+
+	}
     else if( _tcscmp(pstrName, _T("itemendellipsis")) == 0 ) {
         if( _tcscmp(pstrValue, _T("true")) == 0 ) m_ListInfo.uTextStyle |= DT_END_ELLIPSIS;
         else m_ListInfo.uTextStyle &= ~DT_END_ELLIPSIS;
@@ -2583,10 +2632,10 @@ void CListTextElementUI::DrawItemText(HDC hDC, const RECT& rcItem)
             else strText.Assign(GetText(i));
             if( pInfo->bShowHtml )
                 CRenderEngine::DrawHtmlText(hDC, m_pManager, rcItem, strText.GetData(), iTextColor, \
-                &m_rcLinks[m_nLinks], &m_sLinks[m_nLinks], nLinks, pInfo->nFont, pInfo->uTextStyle);
+                &m_rcLinks[m_nLinks], &m_sLinks[m_nLinks], nLinks, pInfo->nFont, pInfo->uTextStyleEx[i]);
             else
                 CRenderEngine::DrawText(hDC, m_pManager, rcItem, strText.GetData(), iTextColor, \
-                pInfo->nFont, pInfo->uTextStyle);
+                pInfo->nFont, pInfo->uTextStyleEx[i]);
 
             m_nLinks += nLinks;
             nLinks = lengthof(m_rcLinks) - m_nLinks; 

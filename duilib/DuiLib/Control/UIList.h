@@ -42,6 +42,7 @@ typedef struct tagTListInfoUI
     DWORD dwVLineColor;
     bool bShowHtml;
     bool bMultiExpandable;
+	UINT uTextStyleEx[UILIST_MAX_COLUMNS];  // 想控制每栏有不同的排列方式，而不是都是一样的
 } TListInfoUI;
 
 

@@ -1,6 +1,18 @@
 #include "stdafx.h"
 #include "Utils.h"
 
+static BOOL _IsBlankChar(IN char ch)
+{
+	if (' ' == ch || '\t' == ch || '\r' == ch || '\n' == ch)
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
+
 namespace DuiLib
 {
     /////////////////////////////////////////////////////////////////////////////////////
@@ -507,6 +519,47 @@ namespace DuiLib
 		if( m_pstr != m_szBuffer ) free(m_pstr);
 		m_pstr = m_szBuffer;
 		m_szBuffer[0] = _T('\0'); 
+	}
+
+	void CDuiString::Trim() {
+
+		// 求得字符串长度
+		DWORD  dwLen = GetLength();
+		// 如果字符串长度为0
+		if (0 == dwLen)
+			return;
+
+		DWORD dwFirstNbPos = 0;             // 第一个不为空白字符的位置
+		DWORD dwLastNbPos = 0;              // 最后一个不为空白字符的位置
+
+		// 计算出第一个不为空白字符的位置
+		for (dwFirstNbPos = 0; dwFirstNbPos < dwLen; dwFirstNbPos++) {
+			if (!_IsBlankChar(m_pstr[dwFirstNbPos])) {
+				break;
+			}
+		}
+
+		// 计算出最后一个不为空白字符的位置
+		for (dwLastNbPos = dwLen - 1; dwLastNbPos >= dwFirstNbPos; dwLastNbPos--) {
+			if (!_IsBlankChar(m_pstr[dwLastNbPos])) {
+				break;
+			}
+		}
+
+		// 计算前后剪裁掉空白字符后的应有的长度
+		DWORD dwNewLen = dwLastNbPos - dwFirstNbPos + 1;
+
+		// 如果新字符串的长度为0
+		if (0 == dwNewLen) {
+			m_pstr[0] = '\0';
+			return;
+		}
+
+		// 如果新字符串的长度不为0	
+		// 移动字符串
+		DWORD dwMoveLen = dwNewLen;
+		memmove(m_pstr, m_pstr + dwFirstNbPos, dwMoveLen);
+		m_pstr[dwMoveLen] = '\0';
 	}
 
 	LPCTSTR CDuiString::GetData() const
