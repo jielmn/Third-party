@@ -1136,6 +1136,7 @@ bool CListBodyUI::SortItems(PULVCompareFunc pfnCompare, UINT_PTR dwData, int& iC
 	m_pCompareFunc = pfnCompare;
 	CControlUI *pCurSelControl = GetItemAt(iCurSel);
 	CControlUI **pData = (CControlUI **)m_items.GetData();
+	m_compareData = dwData;
 	qsort_s(m_items.GetData(), m_items.GetSize(), sizeof(CControlUI*), CListBodyUI::ItemComareFunc, this);
 	if (pCurSelControl) iCurSel = GetItemIndex(pCurSelControl);
 	IListItemUI *pItem = NULL;
