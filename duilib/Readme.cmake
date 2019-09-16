@@ -7,6 +7,7 @@
 3. begin to create makefiles at build dir. eg: d:\dev\cmake\bin\cmake.exe ..
 4. build all apps. eg: nmake
 5. enjoy your dui apps at bin directory. eg: d:\dev\duilib\bin
+6. 可以禁用一些告警信息：4302;4244;4838
 
 process listed have been tested under vc2010 and winsdk7.1
 
