@@ -68,6 +68,9 @@
 //     修改flot属性相关的
 #define NOT_SURE_DEBUG1_FLAG
 
+// 是否开启编辑框的textchange事件
+#define EDIT_TEXT_CHANGE_NOTIFY_FLAG       0
+
 // END(不确定的改动)
 
 //{{AFX_INSERT_LOCATION}}

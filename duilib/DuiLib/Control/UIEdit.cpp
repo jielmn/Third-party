@@ -220,6 +220,11 @@ namespace DuiLib
 			}
 			bHandled = FALSE;
 		}
+#if EDIT_TEXT_CHANGE_NOTIFY_FLAG
+		else if (uMsg == WM_KEYUP) {
+			lRes = OnEditChanged(uMsg, wParam, lParam, bHandled);
+		}
+#endif
 		else bHandled = FALSE;
 		if( !bHandled ) return CWindowWnd::HandleMessage(uMsg, wParam, lParam);
 		return lRes;
