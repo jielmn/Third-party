@@ -827,9 +827,9 @@ void CControlUI::Init()
 #ifdef ONLY_ONCE_DOINIT
 	// 只需初始化一次
 	if ( !m_bInitiated) {
-		DoInit();
-		if (OnInit) OnInit(this);
 		m_bInitiated = true;
+		DoInit();
+		if (OnInit) OnInit(this);		
 	}
 #else
 	DoInit();
