@@ -842,14 +842,26 @@ void CListUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
         if( _tcsstr(pstrValue, _T("left")) != NULL ) {
             m_ListInfo.uTextStyle &= ~(DT_CENTER | DT_RIGHT);
             m_ListInfo.uTextStyle |= DT_LEFT;
+			for (int i = 0; i < UILIST_MAX_COLUMNS; i++) {
+				m_ListInfo.uTextStyleEx[i] &= ~(DT_CENTER | DT_RIGHT);
+				m_ListInfo.uTextStyleEx[i] |= DT_LEFT;
+			}
         }
         if( _tcsstr(pstrValue, _T("center")) != NULL ) {
             m_ListInfo.uTextStyle &= ~(DT_LEFT | DT_RIGHT);
             m_ListInfo.uTextStyle |= DT_CENTER;
+			for (int i = 0; i < UILIST_MAX_COLUMNS; i++) {
+				m_ListInfo.uTextStyleEx[i] &= ~(DT_LEFT | DT_RIGHT);
+				m_ListInfo.uTextStyleEx[i] |= DT_CENTER;
+			}
         }
         if( _tcsstr(pstrValue, _T("right")) != NULL ) {
             m_ListInfo.uTextStyle &= ~(DT_LEFT | DT_CENTER);
             m_ListInfo.uTextStyle |= DT_RIGHT;
+			for (int i = 0; i < UILIST_MAX_COLUMNS; i++) {
+				m_ListInfo.uTextStyleEx[i] &= ~(DT_LEFT | DT_CENTER);
+				m_ListInfo.uTextStyleEx[i] |= DT_RIGHT;
+			}
         }
     }
     else if (_tcscmp(pstrName, _T("itemvalign")) == 0)
