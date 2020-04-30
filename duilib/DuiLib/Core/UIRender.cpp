@@ -1246,6 +1246,14 @@ void CRenderEngine::DrawLine( HDC hDC, const RECT& rc, int nSize, DWORD dwPenCol
 	::DeleteObject(hPen);
 }
 
+void CRenderEngine::DrawBorderLine(HDC hDC, const RECT& rc, int nSize, DWORD dwPenColor) {
+	ASSERT(::GetObjectType(hDC) == OBJ_DC || ::GetObjectType(hDC) == OBJ_MEMDC);
+
+	HBRUSH  hBrush    = CreateSolidBrush(RGB(GetBValue(dwPenColor), GetGValue(dwPenColor), GetRValue(dwPenColor)));
+	::FillRect(hDC, &rc, hBrush);
+	::DeleteObject(hBrush);
+}
+
 void CRenderEngine::DrawRect(HDC hDC, const RECT& rc, int nSize, DWORD dwPenColor, int nStyle)
 {
     ASSERT(::GetObjectType(hDC)==OBJ_DC || ::GetObjectType(hDC)==OBJ_MEMDC);

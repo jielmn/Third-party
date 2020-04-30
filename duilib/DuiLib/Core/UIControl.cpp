@@ -1165,37 +1165,43 @@ void CControlUI::PaintBorder(HDC hDC)
 				RECT rcBorder;
 				if(m_rcBorderSize.left > 0){					
 					rcBorder		= m_rcItem;
-					rcBorder.right	= rcBorder.left + m_rcBorderSize.left - 1;
+					rcBorder.right	= rcBorder.left + m_rcBorderSize.left;
 					if (IsFocused() && m_dwFocusBorderColor != 0)
-						CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.left,GetAdjustColor(m_dwFocusBorderColor),m_nBorderStyle);
+						// CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.left,GetAdjustColor(m_dwFocusBorderColor),m_nBorderStyle);
+						CRenderEngine::DrawBorderLine(hDC, rcBorder, m_rcBorderSize.left, GetAdjustColor(m_dwFocusBorderColor));
 					else
-						CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.left,GetAdjustColor(m_dwBorderColor),m_nBorderStyle);
+						//CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.left,GetAdjustColor(m_dwBorderColor),m_nBorderStyle);
+						CRenderEngine::DrawBorderLine(hDC, rcBorder, m_rcBorderSize.left, GetAdjustColor(m_dwBorderColor));
 				}
 				if(m_rcBorderSize.top > 0) {
 					rcBorder		= m_rcItem;
-					rcBorder.bottom	= rcBorder.top + m_rcBorderSize.top - 1;
+					rcBorder.bottom	= rcBorder.top + m_rcBorderSize.top;
 					if (IsFocused() && m_dwFocusBorderColor != 0)
-						CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.top,GetAdjustColor(m_dwFocusBorderColor),m_nBorderStyle);
+						//CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.top,GetAdjustColor(m_dwFocusBorderColor),m_nBorderStyle);
+						CRenderEngine::DrawBorderLine(hDC, rcBorder, m_rcBorderSize.top, GetAdjustColor(m_dwFocusBorderColor));
 					else
-						CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.top,GetAdjustColor(m_dwBorderColor),m_nBorderStyle);
+						// CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.top,GetAdjustColor(m_dwBorderColor),m_nBorderStyle);
+						CRenderEngine::DrawBorderLine(hDC, rcBorder, m_rcBorderSize.top, GetAdjustColor(m_dwBorderColor));
 				}
 				if(m_rcBorderSize.right > 0) {
 					rcBorder		= m_rcItem;
-					rcBorder.right--;
-					rcBorder.left	= rcBorder.right - m_rcBorderSize.right + 1;
+					rcBorder.left	= rcBorder.right - m_rcBorderSize.right;
 					if (IsFocused() && m_dwFocusBorderColor != 0)
-						CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.right,GetAdjustColor(m_dwFocusBorderColor),m_nBorderStyle);
+						//CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.right,GetAdjustColor(m_dwFocusBorderColor),m_nBorderStyle);
+						CRenderEngine::DrawBorderLine(hDC, rcBorder, m_rcBorderSize.right, GetAdjustColor(m_dwFocusBorderColor));
 					else
-						CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.right,GetAdjustColor(m_dwBorderColor),m_nBorderStyle);
+						//CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.right,GetAdjustColor(m_dwBorderColor),m_nBorderStyle);
+						CRenderEngine::DrawBorderLine(hDC, rcBorder, m_rcBorderSize.right, GetAdjustColor(m_dwBorderColor));
 				}
 				if(m_rcBorderSize.bottom > 0) {
 					rcBorder		= m_rcItem;
-					rcBorder.bottom--;
-					rcBorder.top	= rcBorder.bottom - m_rcBorderSize.bottom + 1;
+					rcBorder.top	= rcBorder.bottom - m_rcBorderSize.bottom ;
 					if (IsFocused() && m_dwFocusBorderColor != 0)
-						CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.bottom,GetAdjustColor(m_dwFocusBorderColor),m_nBorderStyle);
+						// CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.bottom,GetAdjustColor(m_dwFocusBorderColor),m_nBorderStyle);
+					    CRenderEngine::DrawBorderLine(hDC, rcBorder, m_rcBorderSize.bottom, GetAdjustColor(m_dwFocusBorderColor));
 					else
-						CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.bottom,GetAdjustColor(m_dwBorderColor),m_nBorderStyle);
+						//CRenderEngine::DrawLine(hDC,rcBorder,m_rcBorderSize.bottom,GetAdjustColor(m_dwBorderColor),m_nBorderStyle);
+						CRenderEngine::DrawBorderLine(hDC, rcBorder, m_rcBorderSize.bottom, GetAdjustColor(m_dwBorderColor));
 				}
 			}
 		}
