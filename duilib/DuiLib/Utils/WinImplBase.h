@@ -71,6 +71,29 @@ namespace DuiLib
 		virtual LRESULT HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 		virtual LONG GetStyle();
 	};
+
+
+
+
+
+	class DUILIB_API MyDuiFrameWnd : public WindowImplBase {
+	public:
+		MyDuiFrameWnd( const char * szClass, const char * szSkinFile, 
+			           const char * szFolder="", int nZipRes=0 );
+		virtual UILIB_RESOURCETYPE GetResourceType() const;
+		virtual LPCTSTR GetResourceID() const;
+
+	protected:
+		CDuiString       m_strClassName;
+		CDuiString       m_strSkinFile;
+		CDuiString       m_strSkinFolder;
+		int              m_nZipRes;
+
+	protected:
+		virtual CDuiString GetSkinFolder();
+		virtual CDuiString GetSkinFile();
+		virtual LPCTSTR GetWindowClassName() const;		
+	};
 }
 
 #endif // WIN_IMPL_BASE_HPP

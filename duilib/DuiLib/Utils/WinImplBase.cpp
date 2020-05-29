@@ -460,4 +460,59 @@ void WindowImplBase::Notify(TNotifyUI& msg)
 	return CNotifyPump::NotifyPump(msg);
 }
 
+
+
+
+
+
+
+
+MyDuiFrameWnd::MyDuiFrameWnd( const char * szClass, const char * szSkinFile,
+	                          const char * szFolder /*= ""*/, int nZipRes /*= 0*/) {
+	m_strClassName  = szClass;
+	m_strSkinFile   = szSkinFile;
+	m_strSkinFolder = szFolder;
+	m_nZipRes       = nZipRes;
+}
+
+CDuiString MyDuiFrameWnd::GetSkinFolder() {
+#ifndef _DEBUG
+	return "";
+#else
+	return m_strSkinFolder;
+#endif
+}
+
+CDuiString MyDuiFrameWnd::GetSkinFile() {
+	return m_strSkinFile;
+}
+
+LPCTSTR MyDuiFrameWnd::GetWindowClassName() const {
+	return m_strClassName;
+}
+
+UILIB_RESOURCETYPE MyDuiFrameWnd::GetResourceType() const {
+#ifndef _DEBUG
+	return UILIB_ZIPRESOURCE;
+#else
+	return UILIB_FILE;
+#endif
+}
+
+LPCTSTR MyDuiFrameWnd::GetResourceID() const {
+#ifndef _DEBUG
+	return MAKEINTRESOURCE(m_nZipRes);
+#else
+	return "";
+#endif	
+}
+
+
+
+
+
+
+
+
+
 }
